@@ -1,0 +1,49 @@
+#include<stdio.h>
+
+struct Process {
+    int pid;          // process id
+    int burst_time;   // burst time
+    int wait_time;    // wait time
+    int turn_around;  // turnaround time
+};
+
+void findWaitingTime(struct Process proc[], int n, int wt[])
+{
+    // waiting time for first process is 0
+    wt[0] = 0;
+
+    // calculating waiting time
+    for (int i = 1; i < n ; i++ )
+        wt[i] = proc[i-1].burst_time + wt[i-1] ;
+}
+
+// Function to calculate turn around time
+void findTurnAroundTime( struct Process proc[], int n, int wt[], int tat[])
+{
+    // calculating turnaround time by adding
+    // burst_time[i] + wait_time[i]
+    for (int i = 0; i < n ; i++)
+        tat[i] = proc[i].burst_time + wt[i];
+}
+
+// Function to calculate average waiting and turn-around times.
+void findavgTime(struct Process proc[], int n)
+{
+    int wt[n], tat[n], total_wt = 0, total_tat = 0;
+
+    // Function to find waiting time of all processes
+    findWaitingTime(proc, n, wt);
+
+    // Function to find turn around time for all processes
+    findTurnAroundTime(proc, n, wt, tat);
+
+    // Display processes along with all details
+    printf("Processes  Burst time  Waiting time  Turn around time\n");
+
+    // Calculate total waiting time and total turn
+    // around time
+    for (int i = 0; i < n; i++) {
+        total_wt = total_wt + wt[i];
+        total_tat
+
+        
